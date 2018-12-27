@@ -15,11 +15,11 @@ AC_DEFUN(
 
 	  [gnuplot],
 	  [
-		AS_HELP_STRING(
+AS_HELP_STRING(
 
-		  [--with-gnuplot=@<:@ARG@:>@],
-		  [Instruct the Build process to use the instance of gnuplot which is installed at @<:@ARG@:>@. Note that the value which is specified, will not be tested to see if it actually exists.]
-		)
+[--with-gnuplot=@<:@yes|no|ARG@:>@],
+[Instruct the Build process to use the instance of gnuplot which is installed at @<:@ARG@:>@. Note that the value which is specified, will not be tested to see if it actually exists.]
+)
 	  ],
 	  [GNUPLOT=${withval}],
 	  [GNUPLOT=""]
