@@ -18,7 +18,7 @@ AC_DEFUN(
 AS_HELP_STRING(
 
 [--with-gnuplot=@<:@yes|no|ARG@:>@],
-[Instruct the Build process to use the instance of gnuplot which is installed at @<:@ARG@:>@. Note that the value which is specified, will not be tested to see if it actually exists.]
+[build using either 1) the first instance of gnuplot which is found on the system, or 2) don't use gnuplot at all, or 3) use the instance of gnuplot which is installed at ARG]
 )
 	  ],
 	  [GNUPLOT=${withval}],
