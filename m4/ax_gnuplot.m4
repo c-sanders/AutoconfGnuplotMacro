@@ -18,7 +18,7 @@ AC_DEFUN(
 AS_HELP_STRING(
 
 [--with-gnuplot=@<:@yes|no|path_to_gnuplot@:>@],
-[Either use the instance of gnuplot that resides in the user's PATH (ARG=yes), don't use an instance of gnuplot at all (ARG=no), or use the instance of gnuplot that resides at a specific loction (ARG=<path_to_gnuplot>)]
+[Either, a) use the instance of gnuplot that resides in the user's PATH (ARG=yes), b) don't use an instance of gnuplot at all (ARG=no), or c) use the instance of gnuplot which resides at a specific loction (ARG=<path_to_gnuplot>)]
 )
 	  ],
 	  [GNUPLOT=${withval}],
