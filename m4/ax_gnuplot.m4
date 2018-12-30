@@ -18,7 +18,7 @@ AC_DEFUN(
 AS_HELP_STRING(
 
 [--with-gnuplot=@<:@yes|no|path_to_gnuplot@:>@],
-[Either, a) use the first instance of gnuplot that resides within the user's PATH (ARG=yes), b) don't use an instance of gnuplot at all (ARG=no), or c) use the instance of gnuplot which resides at a specific loction (ARG=path_to_gnuplot)]
+[Have the build process either, use the first instance of gnuplot which resides is found within the user's PATH (ARG=yes), not use an instance of gnuplot at all (ARG=no), or use the instance of gnuplot which resides at a specific loction (ARG=path_to_gnuplot)]
 )
 	  ],
 	  [GNUPLOT=${withval}],
@@ -28,7 +28,7 @@ AS_HELP_STRING(
 	AS_CASE(
 
 	  [${withval}],
-	  [yes], [GNUPLOT="gnuplot"],
+	  [yes], [GNUPLOT="gnuplot"],  [AC_CHECK_PROG([FFMPEG], [ffmpeg], [ffmpeg], [""])],
 	  [no],  [GNUPLOT=""],
 	  [GNUPLOT="${withval}"]
 	)
