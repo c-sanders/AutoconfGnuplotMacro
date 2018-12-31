@@ -8,6 +8,7 @@ m4_include([m4/ax_gnuplot.m4])
 AC_CONFIG_MACRO_DIR([m4])
 
 AX_GNUPLOT()
+AX_FFMPEG()
 
 AC_MSG_NOTICE([GNUPLOT = \"${GNUPLOT}\"])
 
