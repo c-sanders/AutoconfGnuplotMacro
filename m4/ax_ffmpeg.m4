@@ -28,7 +28,7 @@ AS_HELP_STRING(
 	AS_CASE(
 
 	  [${withval}],
-	  [yes], [AC_CHECK_PROG([FFMPEG], [ffmpeg], [ffmpeg], [""])],
+	  [yes], [AC_CHECK_PROG([FFMPEG], [ffmpeg], [ffmpeg], ["not-specified"])],
 	  [no],  [FFMPEG=""],
 	  [FFMPEG="${withval}"]
 	)
