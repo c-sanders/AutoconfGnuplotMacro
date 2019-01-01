@@ -4,6 +4,7 @@ AM_INIT_AUTOMAKE
 LT_INIT
 
 m4_include([m4/ax_gnuplot.m4])
+m4_include([m4/ax_ffmpeg.m4])
 
 AC_CONFIG_MACRO_DIR([m4])
 
