@@ -1,0 +1,101 @@
+## ----------------------------------------------------------------------------
+## You should remove the annotation comments from this file - that is, lines
+## which start with ##, before using it.
+##
+## This can be accomplished by processing this file with a command such as the
+## following one ;
+##
+##   sed -e '/^[ \t]*##.*$/d' -e 'N' -e 's/^[ \t]*\n/\n/'
+## ----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# Macro : AX_FFMPEG
+# =================
+#
+# This macro can be used to inform the Autotools about the ffmpeg program.
+# -----------------------------------------------------------------------------
+#
+# Not specified                   :  withval=yes  (default value)
+# --with-ffmpeg                   :  withval=yes
+# --with-ffmpeg=yes               :  withval=yes
+# --with-ffmpeg=<path_to_ffmpeg>  :  withval=<path_to_ffmpeg>
+# --without-ffmpeg                :  withval=no
+#
+# -----------------------------------------------------------------------------
+
+
+AC_DEFUN(
+
+	## AC_DEFUN arg 1 : Name of Autoconf macro
+
+	[AX_FFMPEG],
+
+	## AC_DEFUN arg 2 : Body (definition) of Autoconf macro
+
+	[
+
+		## Macro : AC_ARG_WITH
+		##
+		## Register the name ffmpeg with the configure script. In turn, this will enable the
+		## --with-ffmpeg and --without-ffmpeg configure script options, and cause them to become
+		## available to the user.
+
+		AC_ARG_WITH(
+
+			## AC_ARG_WITH arg 1 : Name to register with the configure script.
+
+			[ffmpeg],
+			
+			## AC_ARG_WITH arg 2 : Help string to associate with the configure script options.
+
+			[
+AS_HELP_STRING(
+					[--with-ffmpeg=@<:@yes|no|path_to_ffmpeg@:>@],
+					[Instruct the build process to either, 1) use the first instance of ffmpeg which is found within the build user's PATH (ARG=yes), 2) not use an instance of ffmpeg at all (ARG=no), or 3) use the instance of ffmpeg which resides at a specific loction (ARG=path_to_ffmpeg). @<:@default=yes@:>@]
+				)
+			],
+
+			## AC_ARG_WITH arg 3 : Code to execute if the configure script option is specified.
+
+			[
+				AS_BOX(
+					["--with-ffmpeg specified : withval = ${withval}"],
+					[=])
+			],
+
+			## AC_ARG_WITH arg 4 : Code to execute if the configure script option is not specified.
+
+			[
+				withval=yes
+				with_ffmpeg=yes
+				AS_BOX(
+					["--with-ffmpeg not specified : withval = ${withval}"],
+					[=])
+			]
+		)
+
+		## Common code to execute.
+		##
+		## This is usually contingent upon if or how the configure sript options were invoked.
+
+		AS_CASE(
+
+			[${withval}],
+			[yes],
+				[
+					AC_CHECK_PROG(
+					
+						[FFMPEG],
+						[ffmpeg],
+						[ffmpeg],
+						AC_MSG_NOTICE(["ffmpeg not in PATH"])
+					)
+				],
+			[no], 
+				[FFMPEG=""],
+			[FFMPEG="${withval}"]
+		)
+
+		dnl AC_SUBST(FFMPEG)
+	]
+)
