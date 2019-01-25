@@ -5,8 +5,7 @@
 ## This can be accomplished by processing this file with a command such as the
 ## following one ;
 ##
-##   cat ax_ffmpeg.m4.annotated | grep --invert-match -e "[ \t]*##.*" > ax_ffmpeg.m4
-##
+##   grep --invert-match --perl-regexp --regexp="[ \t]*##.*" --file="ax_ffmpeg.m4.annotated" > ax_ffmpeg.m4
 ## ----------------------------------------------------------------------------
 ##
 # -----------------------------------------------------------------------------
@@ -35,7 +34,7 @@ AC_DEFUN(
 	##
 	[
 
-        ## Macro : AC_ARG_WITH
+		## Macro : AC_ARG_WITH
 		##
 		## Register the name ffmpeg with the configure script. In turn, this will enable the
 		## --with-ffmpeg and --without-ffmpeg configure script options, and cause them to become
