@@ -1,11 +1,11 @@
 ## ----------------------------------------------------------------------------
-## Before using this file, you should remove the annotation comments from it -
-## that is, lines which start with ##.
+## In order to use this file, you first need to remove the annotation comments
+## from it; that is, lines which start with ##.
 ##
 ## This can be accomplished by processing this file with a command such as the
 ## following one ;
 ##
-##   grep --invert-match --perl-regexp --regexp="[ \t]*##.*" --file="ax_ffmpeg.m4.annotated" > ax_ffmpeg.m4
+##   grep --invert-match --perl-regexp --regexp="^[ \t]*##.*$" --file="ax_ffmpeg.m4.annotated" > ax_ffmpeg.m4
 ## ----------------------------------------------------------------------------
 ##
 # -----------------------------------------------------------------------------
