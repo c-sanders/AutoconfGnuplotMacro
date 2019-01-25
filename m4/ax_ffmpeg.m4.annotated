@@ -1,13 +1,14 @@
 ## ----------------------------------------------------------------------------
-## You should remove the annotation comments from this file - that is, lines
-## which start with ##, before using it.
+## Before using this file, you should remove the annotation comments from it -
+## that is, lines which start with ##.
 ##
 ## This can be accomplished by processing this file with a command such as the
 ## following one ;
 ##
-##   sed -e '/^[ \t]*##.*$/d' -e 'N' -e 's/^[ \t]*\n/\n/'
+##   cat ax_ffmpeg.m4.annotated | grep --invert-match -e "[ \t]*##.*" > ax_ffmpeg.m4
+##
 ## ----------------------------------------------------------------------------
-
+##
 # -----------------------------------------------------------------------------
 # Macro : AX_FFMPEG
 # =================
@@ -27,27 +28,27 @@
 AC_DEFUN(
 
 	## AC_DEFUN arg 1 : Name of Autoconf macro
-
+	##
 	[AX_FFMPEG],
 
 	## AC_DEFUN arg 2 : Body (definition) of Autoconf macro
-
+	##
 	[
 
-		## Macro : AC_ARG_WITH
+        ## Macro : AC_ARG_WITH
 		##
 		## Register the name ffmpeg with the configure script. In turn, this will enable the
 		## --with-ffmpeg and --without-ffmpeg configure script options, and cause them to become
 		## available to the user.
-
+		##
 		AC_ARG_WITH(
 
 			## AC_ARG_WITH arg 1 : Name to register with the configure script.
-
+			##
 			[ffmpeg],
 			
 			## AC_ARG_WITH arg 2 : Help string to associate with the configure script options.
-
+			##
 			[
 AS_HELP_STRING(
 					[--with-ffmpeg=@<:@yes|no|path_to_ffmpeg@:>@],
@@ -56,7 +57,7 @@ AS_HELP_STRING(
 			],
 
 			## AC_ARG_WITH arg 3 : Code to execute if the configure script option is specified.
-
+			##
 			[
 				AS_BOX(
 					["--with-ffmpeg specified : withval = ${withval}"],
@@ -64,7 +65,7 @@ AS_HELP_STRING(
 			],
 
 			## AC_ARG_WITH arg 4 : Code to execute if the configure script option is not specified.
-
+			##
 			[
 				withval=yes
 				with_ffmpeg=yes
@@ -77,7 +78,7 @@ AS_HELP_STRING(
 		## Common code to execute.
 		##
 		## This is usually contingent upon if or how the configure sript options were invoked.
-
+		##
 		AS_CASE(
 
 			[${withval}],
