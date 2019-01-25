@@ -1,11 +1,21 @@
 ## ----------------------------------------------------------------------------
-## In order to use this file, you first need to remove the annotation comments
-## from it; that is, lines which start with ##.
+## PLEASE READ THE FOLLOWING!!!
+## ============================
 ##
-## This can be accomplished by processing this file with a command such as the
-## following one ;
+## This file contains an annotated version of an Autoconf macro. As a result,
+## it cannot be used as an Autoconf macro the way it is! In order to use it as
+## an Autoconf macro, the Annotation comments must first be removed from it.
+## Annotation comments are comments which reside on a line all by themselves and
+## which start with ##.
 ##
-##   grep --invert-match --perl-regexp --regexp="^[ \t]*##.*$" --file="ax_ffmpeg.m4.annotated" > ax_ffmpeg.m4
+## Removal of the Annotation comments from this file can be accomplished by
+## processing it with a command which is similar to the following one ;
+##
+##   grep --invert-match \
+##        --perl-regexp \
+##        --regexp="^[ \t]*##.*$" \
+##        --file="ax_ffmpeg.m4.annotated" \
+##        > ax_ffmpeg.m4
 ## ----------------------------------------------------------------------------
 ##
 # -----------------------------------------------------------------------------
