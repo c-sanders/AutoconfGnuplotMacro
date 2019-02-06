@@ -4,34 +4,131 @@
 ##
 ## This file contains an annotated version of an Autoconf macro. As a result,
 ## it cannot be used as an Autoconf macro the way it is! In order to use it as
-## an Autoconf macro, the Annotation comments must first be removed from it.
-## Annotation comments are comments which reside on a line all by themselves and
-## which start with ##.
+## one, the Annotation comments must first be removed from it. The Annotation
+## comments in this file are comments which reside on a line all by themselves
+## and which start with ##.
 ##
-## Removal of the Annotation comments from this file can be accomplished by
-## processing it with a command which is similar to the following one ;
+## Removal of the Annotation comments from this file can be accomplished
+## automatically by processing it with a command which is similar to the
+## following one ;
 ##
 ##   grep --invert-match \
 ##        --perl-regexp \
 ##        --regexp="^[ \t]*##.*$" \
 ##        --file="ax_ffmpeg.m4.annotated" \
 ##        > ax_ffmpeg.m4
+##
+## Alternatively, they could be removed manually using a Text Editor.
 ## ----------------------------------------------------------------------------
 ##
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Macro : AX_FFMPEG
 # =================
 #
-# This macro can be used to inform the Autotools about the ffmpeg program.
+#
+# SYNOPSIS
+# --------
+#
+#   AX_FFMPEG(MAJOR_VERSION, MINOR_VERSION, RELEASE_NUMBER)
+#
+#
+# DESCRIPTION
+# -----------
+#
+#   This Autoconf macro can be used to specify or search for the ffmpeg command
+#   line utility.
+#
+#   If a package uses the ffmpeg command line utility, then the maintainer of
+#   that package can use the AX_FFMPEG Autoconf macro to assist anyone who is
+#   trying to configure and build the package. This macro provides assistance,
+#   by making the following configure script options available to anyone who
+#   runs the Autotools generated configure script which is created for the
+#   package;
+#
+#     --with-ffmpeg
+#     --wihtout-ffmpeg
+#
+#   When configuring any package which makes use of the AX_FFMPEG Autoconf
+#   macro, these two options can be used to specify or search for the ffmpeg
+#   command line utility that should be used during the build process.
+#
+#   Furthermore, the Package maintainer can stipulate a minimum required version
+#   number of the ffmpeg command line utility which should used during the build
+#   process. This minimum required version number can be passed as three
+#   arguments (major version number, minor version number, and release number)
+#   to the Autoconf macro, when it is invoked from within the package's configure
+#   script template, i.e. configure.ac.
+#
+#   Examples
+#
+#   1) Invocation of the macro from within configure.ac
+#
+#   AX_FFMPEG(["1"], ["2"], ["3"])
+#
+#   The build process for the package should use a version of the ffmpeg command
+#   line utility which is equal to version 1.2.3 or greater.
+#
+#   2) Use of the configure script options : Scenario 1
+#
+#   configure ... --with-ffmpeg
+#
+#   or
+#
+#   configure ... --with-ffmpeg=yes
+#
+#   Both of these scenarios will cause the configure script to search for the
+#   ffmpeg command line utility within the PATH of the user who invoked the
+#   configure script. If an instance of it is found, then the build process is
+#   instructed to use that instance of it.
+#
+#   3) Use of the configure script options : Scenario 2
+#
+#   configure ... --with-ffmpeg=/home/foo/local/bin/ffmpeg
+#
+#   In this scenario, the configure script has been instructed to use an
+#   instance of the ffmpeg command line utility which supposedly resides at a
+#   particular location within the filesystem hierarchy. The configure script
+#   will check to see if an instance of the ffmpeg command line utility does
+#   indeed reside at this particular location within the filesystem hierarchy,
+#   and if it does, then the configure script will instruct the build process
+#   to use that instance of it.
+#
+#   4) Use of the configure script options : Scenario 3
+#
+#   configure ... --with-ffmpeg=no
+#
+#   or
+#
+#   configure ... --without-ffmpeg
+#
+#   Both of these scenarios will cause the configure script to instruct the
+#   build process to NOT use the ffmpeg command line utility.
+#
+# URL
+# ---
+#
+#   https://github.com/fartball/...
+#
 # -----------------------------------------------------------------------------
 #
-# Not specified                   :  withval=yes  (default value)
-# --with-ffmpeg                   :  withval=yes
+# Not specified                   :  withval=yes  (default value due to non
+#                                                  specification)
+# --with-ffmpeg                   :  withval=yes  (default value due to partial
+#                                                  specification)
 # --with-ffmpeg=yes               :  withval=yes
 # --with-ffmpeg=<path_to_ffmpeg>  :  withval=<path_to_ffmpeg>
 # --without-ffmpeg                :  withval=no
 #
 # -----------------------------------------------------------------------------
+#
+# LICENCE
+#
+#   Copyright (c) 2019 Craig Sanders
+#
+#   Copying and/or distribution of this file - with or without modification, is
+#   permitted in any medium without royalty, provided the copyright notice
+#   and this notice are preserved. This file is offered as-is, without any
+#   warranty.
 
 
 AC_DEFUN(
@@ -55,20 +152,20 @@ AC_DEFUN(
 			## AC_ARG_WITH arg 1 : Name to register with the configure script.
 			##
 			[ffmpeg],
-			
+
 			## AC_ARG_WITH arg 2 : Help string to associate with the configure script options.
 			##
-			[
-AS_HELP_STRING(
-					[--with-ffmpeg=@<:@yes|no|path_to_ffmpeg@:>@],
-					[Instruct the build process to either, 1) use the first instance of ffmpeg which is found within the build user's PATH (ARG=yes), 2) not use an instance of ffmpeg at all (ARG=no), or 3) use the instance of ffmpeg which resides at a specific loction (ARG=path_to_ffmpeg). @<:@default=yes@:>@]
-				)
-			],
+			[AS_HELP_STRING(
+			
+				[--with-ffmpeg=@<:@yes|no|path_to_ffmpeg@:>@],
+				[Instruct the build process to either, 1) use the first instance of ffmpeg which is found within the build user's PATH (ARG=yes), 2) not use an instance of ffmpeg at all (ARG=no), or 3) use the instance of ffmpeg which resides at a specific loction (ARG=path_to_ffmpeg). @<:@default=yes@:>@]
+				)],
 
 			## AC_ARG_WITH arg 3 : Code to execute if the configure script option is specified.
 			##
 			[
 				AS_BOX(
+				
 					["--with-ffmpeg specified : withval = ${withval}"],
 					[=])
 			],
@@ -79,6 +176,7 @@ AS_HELP_STRING(
 				withval=yes
 				with_ffmpeg=yes
 				AS_BOX(
+				
 					["--with-ffmpeg not specified : withval = ${withval}"],
 					[=])
 			]
@@ -98,7 +196,7 @@ AS_HELP_STRING(
 						[FFMPEG],
 						[ffmpeg],
 						[ffmpeg],
-						AC_MSG_NOTICE(["ffmpeg not in PATH"])
+						AC_MSG_WARN(["ffmpeg was not in PATH"])
 					)
 				],
 			[no], 
@@ -106,6 +204,32 @@ AS_HELP_STRING(
 			[FFMPEG="${withval}"]
 		)
 
+		## The AC_SUBST macro does not need to be invoked on the variable FFMPEG, as one of the
+		## previous macros does this already, although not sure which one.
+
 		dnl AC_SUBST(FFMPEG)
+
+		minVersionMajor=$1
+		minVersionMinor=$2
+		minVersionRelease=$3
+		
+		minVersion="$1.$2.$3"
+
+		versionFfmpeg=$(${FFMPEG} -version    | ${SED} -e '/^.*ffmpeg version.*$/!d')
+		versionNumber=$(echo ${versionFfmpeg} | ${SED} -e 's/^.*ffmpeg version \(@<:@0123456789@:>@\+\).\(@<:@0123456789@:>@\+\).\(@<:@0123456789@:>@\+\).*$/\1.\2.\3/')
+
+		AC_MSG_NOTICE([Minumum required version of ffmpeg = ${minVersion}])
+		AC_MSG_NOTICE([Ffmpeg version string   = ${versionFfmpeg}])
+		AC_MSG_NOTICE([Found version of ffmpeg = ${versionNumber}])
+
+		AX_COMPARE_VERSION(
+
+			[${versionNumber}],
+			[ge],
+			[${minVersion}],
+			[AC_MSG_NOTICE([Version of ffmpeg found is acceptable.])],
+			[AC_MSG_NOTICE([Version of ffmpeg found is unacceptable; probably because it is too old!])]
+		)
+
 	]
 )
