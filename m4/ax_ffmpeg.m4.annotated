@@ -1,12 +1,12 @@
 ## -----------------------------------------------------------------------------
-## PLEASE READ THE FOLLOWING!!!
-## ============================
+## PLEASE READ THE FOLLOWING BEFORE ATTEMPTING TO USE THIS FILE!!!
+## ===============================================================
 ##
-## This file contains an annotated version of an Autoconf macro. As a result,
-## it cannot be used as an Autoconf macro the way it is! In order to use it as
-## one, the Annotation comments must first be removed from it. The Annotation
-## comments in this file are comments which reside on a line all by themselves
-## and which start with ##.
+## This file contains an annotated version of an Autoconf macro. As a result, it
+## cannot be used as an Autoconf macro the way it is! In order to use it as one,
+## the Annotation comments must first be removed from this file. The Annotation
+## comments within this file are comments which reside on a line all by
+## themselves and which start with ##.
 ##
 ## Removal of the Annotation comments from this file can be accomplished
 ## automatically by processing it with a command which is similar to the
