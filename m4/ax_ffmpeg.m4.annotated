@@ -1,4 +1,4 @@
-## ----------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ## PLEASE READ THE FOLLOWING!!!
 ## ============================
 ##
@@ -12,15 +12,13 @@
 ## automatically by processing it with a command which is similar to the
 ## following one ;
 ##
+##   cat ax_ffmpeg.m4.annotated | \
 ##   grep --invert-match \
 ##        --perl-regexp \
 ##        --regexp="^[ \t]*##.*$" \
-##        --file="ax_ffmpeg.m4.annotated" \
 ##        > ax_ffmpeg.m4
 ##
-## Alternatively, they could be removed manually using a Text Editor.
-## ----------------------------------------------------------------------------
-##
+## Alternatively, they could be removed manually by using a Text Editor.
 # ------------------------------------------------------------------------------
 # Macro : AX_FFMPEG
 # =================
@@ -109,7 +107,7 @@
 #
 #   https://github.com/fartball/...
 #
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 #
 # Not specified                   :  withval=yes  (default value due to non
 #                                                  specification)
@@ -119,7 +117,7 @@
 # --with-ffmpeg=<path_to_ffmpeg>  :  withval=<path_to_ffmpeg>
 # --without-ffmpeg                :  withval=no
 #
-# -----------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 #
 # LICENCE
 #
@@ -129,6 +127,8 @@
 #   permitted in any medium without royalty, provided the copyright notice
 #   and this notice are preserved. This file is offered as-is, without any
 #   warranty.
+#
+# ------------------------------------------------------------------------------
 
 
 AC_DEFUN(
