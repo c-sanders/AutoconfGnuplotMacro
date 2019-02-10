@@ -212,8 +212,32 @@ AC_DEFUN(
 		minVersionMajor=$1
 		minVersionMinor=$2
 		minVersionRelease=$3
-		
-		minVersion="$1.$2.$3"
+
+		AS_IF(
+
+			[test -z "$1"],
+			[minVersionMajor=0],
+			[minVersionMajor=$1]
+		)
+		AS_IF(
+
+			[test -z "$2"],
+			[minVersionMinor=0],
+			[minVersionMinor=$2]
+		)
+		AS_IF(
+
+			[test -z "$3"],
+			[minVersionRelease=0],
+			[minVersionRelease=$3]
+		)
+
+
+		AC_MSG_NOTICE([Minumum required major   version of ffmpeg = ${minVersionMajor}])
+		AC_MSG_NOTICE([Minumum required minor   version of ffmpeg = ${minVersionMinor}])
+		AC_MSG_NOTICE([Minumum required release version of ffmpeg = ${minVersionRelease}])
+
+		minVersion="${minVersionMajor}.${minVersionMinor}.${minVersionRelease}"
 
 		versionFfmpeg=$(${FFMPEG} -version    | ${SED} -e '/^.*ffmpeg version.*$/!d')
 		versionNumber=$(echo ${versionFfmpeg} | ${SED} -e 's/^.*ffmpeg version \(@<:@0123456789@:>@\+\).\(@<:@0123456789@:>@\+\).\(@<:@0123456789@:>@\+\).*$/\1.\2.\3/')
@@ -222,14 +246,28 @@ AC_DEFUN(
 		AC_MSG_NOTICE([Ffmpeg version string   = ${versionFfmpeg}])
 		AC_MSG_NOTICE([Found version of ffmpeg = ${versionNumber}])
 
-		AX_COMPARE_VERSION(
-
+		AS_VERSION_COMPARE(
+		
 			[${versionNumber}],
-			[ge],
 			[${minVersion}],
-			[AC_MSG_NOTICE([Version of ffmpeg found is acceptable.])],
-			[AC_MSG_NOTICE([Version of ffmpeg found is unacceptable; probably because it is too old!])]
+			[AC_MSG_NOTICE(["Version of ffmpeg found is unacceptable - probably because it is too old!"])],
+			[AC_MSG_NOTICE(["Version of ffmpeg found is acceptable."])],
+			[AC_MSG_NOTICE(["Version of ffmpeg found is acceptable."])]
 		)
+
+		## This Autoconf macro was using AX_COMPARE_VERSION to compare version strings, before it
+		## was switched over to use AS_VERSION_COMPARE instead. AX_COMPARE_VERSION might be a better
+		## option, but it introduces another dependency into this Autoconf macro which therefore
+		## needs to be m4_included.
+		##
+		## AX_COMPARE_VERSION(
+		##
+		##	[${versionNumber}],
+		##	[ge],
+		##	[${minVersion}],
+		##	[AC_MSG_NOTICE([Version of ffmpeg found is acceptable.])],
+		##	[AC_MSG_NOTICE([Version of ffmpeg found is unacceptable; probably because it is too old!])]
+		## )
 
 	]
 )
