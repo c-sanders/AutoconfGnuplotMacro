@@ -23,7 +23,6 @@
 # Macro : AX_FFMPEG
 # =================
 #
-#
 # SYNOPSIS
 # --------
 #
@@ -101,6 +100,7 @@
 #
 #   Both of these scenarios will cause the configure script to instruct the
 #   build process to NOT use the ffmpeg command line utility.
+#
 #
 # URL
 # ---
