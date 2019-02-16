@@ -1,0 +1,14 @@
+####################################################################################################
+# Filename : README
+####################################################################################################
+
+This package doesn't need to compile or build anythng. All it really needs to do, is to install a
+few files into their correct locations. One of the files that needs to be installed is a Python file
+which is called;
+
+  runFfmpeg.py
+
+Once it is installed in its correct location, it can be run by invoking the Python Interpreter on
+it, i.e.;
+
+  > python python/runFfmpeg.py
