@@ -1,0 +1,365 @@
+## -----------------------------------------------------------------------------
+## PLEASE READ THE FOLLOWING REMARKS BEFORE ATTEMPTING TO USE THIS FILE!!!
+## =======================================================================
+##
+## This file contains an annotated version of an Autoconf macro. As a result, it
+## cannot be used as an Autoconf macro the way it is! In order to use it as one,
+## the Annotation comments must first be removed from this file. The Annotation
+## comments within this file are comments which reside on a line all by
+## themselves and which start with ##.
+##
+## Removal of the Annotation comments from this file can be accomplished
+## automatically by processing it with a command which is similar to the
+## following one ;
+##
+##   cat ax_ffmpeg.m4.annotated | \
+##   grep --invert-match \
+##        --perl-regexp \
+##        --regexp="^[ \t]*##.*$" \
+##        > ax_ffmpeg.m4
+##
+## Alternatively, they could be removed manually by using a Text Editor.
+# ------------------------------------------------------------------------------
+# Macro : AX_FFMPEG
+# =================
+#
+#
+# SYNOPSIS
+# --------
+#
+#   AX_FFMPEG(MAJOR_VERSION, MINOR_VERSION, RELEASE_NUMBER)
+#
+#
+# DESCRIPTION
+# -----------
+#
+#   This Autoconf macro can be used to specify or search for the ffmpeg command
+#   line utility.
+#
+#   If a package uses the ffmpeg command line utility, then the maintainer of
+#   that package can use the AX_FFMPEG Autoconf macro to assist anyone who is
+#   trying to configure and build the package. This macro provides assistance,
+#   by making the following configure script options available to anyone who
+#   runs the Autotools generated configure script which is created for the
+#   package;
+#
+#     --with-ffmpeg
+#     --wihtout-ffmpeg
+#
+#   When configuring any package which makes use of the AX_FFMPEG Autoconf
+#   macro, these two options can be used to specify or search for the ffmpeg
+#   command line utility that should be used during the build process.
+#
+#   Furthermore, the Package maintainer can stipulate a minimum required version
+#   number of the ffmpeg command line utility which should used during the build
+#   process. This minimum required version number can be passed as three
+#   arguments (major version number, minor version number, and release number)
+#   to the Autoconf macro, when it is invoked from within the package's configure
+#   script template, i.e. configure.ac.
+#
+#   Examples
+#
+#   1) Invocation of the macro from within configure.ac
+#
+#   AX_FFMPEG(["1"], ["2"], ["3"])
+#
+#   The build process for the package should use a version of the ffmpeg command
+#   line utility which is equal to version 1.2.3 or greater.
+#
+#   2) Use of the configure script options : Scenario 1
+#
+#   configure ... --with-ffmpeg
+#
+#   or
+#
+#   configure ... --with-ffmpeg=yes
+#
+#   Both of these scenarios will cause the configure script to search for the
+#   ffmpeg command line utility within the PATH of the user who invoked the
+#   configure script. If an instance of it is found, then the build process is
+#   instructed to use that instance of it.
+#
+#   3) Use of the configure script options : Scenario 2
+#
+#   configure ... --with-ffmpeg=/home/foo/local/bin/ffmpeg
+#
+#   In this scenario, the configure script has been instructed to use an
+#   instance of the ffmpeg command line utility which supposedly resides at a
+#   particular location within the filesystem hierarchy. The configure script
+#   will check to see if an instance of the ffmpeg command line utility does
+#   indeed reside at this particular location within the filesystem hierarchy,
+#   and if it does, then the configure script will instruct the build process
+#   to use that instance of it.
+#
+#   4) Use of the configure script options : Scenario 3
+#
+#   configure ... --with-ffmpeg=no
+#
+#   or
+#
+#   configure ... --without-ffmpeg
+#
+#   Both of these scenarios will cause the configure script to instruct the
+#   build process to NOT use the ffmpeg command line utility.
+#
+#
+# URL
+# ---
+#
+#   https://github.com/fartball/AutoconfGnuplotMacro/blob/master/m4/ax_ffmpeg.m4.annotated
+#
+#
+# LICENCE
+# -------
+#
+#   Copyright (c) 2019 Craig Sanders
+#
+#   Copying and/or distribution of this file - with or without modification, is
+#   permitted in any medium without royalty, provided the copyright notice
+#   and this notice are preserved. This file is offered as-is, without any
+#   warranty.
+#
+# ------------------------------------------------------------------------------
+#
+# Not specified                   :  withval=yes  (default value due to non
+#                                                  specification)
+# --with-ffmpeg                   :  withval=yes  (default value due to partial
+#                                                  specification)
+# --with-ffmpeg=yes               :  withval=yes
+# --with-ffmpeg=<path_to_ffmpeg>  :  withval=<path_to_ffmpeg>
+# --without-ffmpeg                :  withval=no
+#
+# ------------------------------------------------------------------------------
+
+
+# Define the Autoconf macro which is named AX_FFMPEG.
+
+AC_DEFUN(
+
+	## AC_DEFUN arg 1 : Name of Autoconf macro
+	##
+	[AX_FFMPEG],
+
+	## AC_DEFUN arg 2 : Body (definition) of Autoconf macro
+	##
+	[
+		minVersionMajor=$1
+		minVersionMinor=$2
+		minVersionRelease=$3
+
+		AC_MSG_NOTICE([Minumum required major   version of ffmpeg = ${minVersionMajor}])
+		AC_MSG_NOTICE([Minumum required minor   version of ffmpeg = ${minVersionMinor}])
+		AC_MSG_NOTICE([Minumum required release version of ffmpeg = ${minVersionRelease}])
+
+		## Macro : AC_ARG_WITH
+		##
+		## Register the name ffmpeg with the configure script. In turn, this will enable the
+		## --with-ffmpeg and --without-ffmpeg configure script options, and cause them to become
+		## available to the user.
+		##
+		AC_ARG_WITH(
+
+			## AC_ARG_WITH arg 1 : Name to register with the configure script.
+			##
+			[ffmpeg],
+
+			## AC_ARG_WITH arg 2 : Help string to associate with the configure script options.
+			##
+			[AS_HELP_STRING(
+
+				[--with-ffmpeg=@<:@yes|no|path_to_ffmpeg@:>@],
+				[Instruct the build process to either, 1) use the first instance of ffmpeg which is found within the build user's PATH (ARG=yes), 2) not use an instance of ffmpeg at all (ARG=no), or 3) use the instance of ffmpeg which resides at a specific loction (ARG=path_to_ffmpeg). @<:@default=yes@:>@]
+				)],
+
+			## AC_ARG_WITH arg 3 : Code to execute if the configure script option is specified.
+			##
+			[
+				AS_BOX(
+
+					["--with-ffmpeg specified : withval = ${withval}"],
+					[=])
+			],
+
+			## AC_ARG_WITH arg 4 : Code to execute if the configure script option is not specified.
+			##
+			[
+				withval=yes
+				with_ffmpeg=yes
+				AS_BOX(
+
+					["--with-ffmpeg not specified : withval = ${withval}"],
+					[=])
+			]
+		)
+
+		## Common code to execute.
+		##
+		## This is usually contingent upon if or how the configure sript options were invoked.
+		##
+		# If the Configure user specified either;
+		#
+		#   --with-ffmpeg
+		#
+		#   or
+		#
+		#   --with-ffmpeg=yes
+		#
+		# then search for the ffmpeg command line utility within the Configure user's PATH. If an
+		# instance of it was found, then set the variable FFMPEG to the result.
+		#
+		# If the Configure user specified;
+		#
+		#   --with-ffmpeg=no
+		#
+		# then set the variable FFMPEG to an empty string.
+		#
+		# If the Configure user specified;
+		#
+		#   --with-ffmpeg=<path_to_ffmpeg>
+		#
+		# then set the variable FFMPEG to <path_to_ffmpeg>.
+
+		AS_CASE(
+
+			[${withval}],
+			[yes],
+				[
+					AC_CHECK_PROG(
+					
+						[FFMPEG],
+						[ffmpeg],
+						[ffmpeg],
+						AC_MSG_WARN(["ffmpeg was not in PATH"])
+					)
+				],
+			[no], 
+				[FFMPEG=""],
+			[FFMPEG="${withval}"]
+		)
+
+		## The AC_SUBST macro does not need to be invoked on the variable FFMPEG, as one of the
+		## previous macros does this already, although not sure which one.
+
+		dnl AC_SUBST(FFMPEG)
+
+		AS_IF(
+
+			[test -z "${FFMPEG}"],
+			[
+				# Configure user does not want to use the ffmpeg command line utility.
+				#
+				# As a result, do nothing.
+			],
+			[
+				AX_FFMPEG_VERSION_COMPARE([${minVersionMajor}], [${minVersionMinor}], [${minVersionRelease}])			
+			]
+		)
+	]
+)
+
+
+# Define the Autoconf macro which is named AX_FFMPEG_VERSION_COMPARE.
+#
+# This is a helper Autoconf macro.
+#
+# It attempts to get the minimum required version number which might have been stipulated by the
+# Package Maintainer, and the actual version number of the ffmpeg command line utility, provided
+# that an instance of it was found. Once it has these two version numbers, this Autoconf macro then
+# compares them to see if the found version of the ffmpeg command line utility is new enough.
+
+AC_DEFUN(
+
+	[AX_FFMPEG_VERSION_COMPARE],
+
+	[
+		# If this routine has been invoked, then we can assume that the Configure user does want to
+		# use the ffmpeg command line utility.
+
+		AC_MSG_NOTICE(["FFMPEG = ${FFMPEG}"])
+
+		AC_MSG_NOTICE([1 = $1])
+		AC_MSG_NOTICE([2 = $2])
+		AC_MSG_NOTICE([3 = $3])
+
+		# Attempt to get the minimum version required for the major, minor, and release numbers.
+		# If these were specified, then they should have been passed as arguments to this Autoconf
+		# macro when it was invoked from within the configure.ac file by the Package Maintainer.
+
+		minVersionMajor=$1
+		minVersionMinor=$2
+		minVersionRelease=$3
+
+		# Check if all the minimum version required numbers just set, are indeed valid. If any of
+		# them aren't, then set the values of those that aren't to 0.
+
+		AS_IF(
+
+			[test -z "$1"],
+			[minVersionMajor=0],
+			[minVersionMajor=$1]
+		)
+		AS_IF(
+
+			[test -z "$2"],
+			[minVersionMinor=0],
+			[minVersionMinor=$2]
+		)
+		AS_IF(
+
+			[test -z "$3"],
+			[minVersionRelease=0],
+			[minVersionRelease=$3]
+		)
+
+		AC_MSG_NOTICE([Minumum required major   version of ffmpeg = ${minVersionMajor}])
+		AC_MSG_NOTICE([Minumum required minor   version of ffmpeg = ${minVersionMinor}])
+		AC_MSG_NOTICE([Minumum required release version of ffmpeg = ${minVersionRelease}])
+
+		# Generate a string which represents the minimum version required number in the form;
+		#
+		#   major.minor.release
+		#
+		# The version of the ffmpeg command line utility, will be checked against this string to
+		# ensure that it new enough.
+
+		minVersion="${minVersionMajor}.${minVersionMinor}.${minVersionRelease}"
+
+		# Get the version of the ffmpeg command line utility.
+
+		versionFfmpeg=$(${FFMPEG} -version    | ${SED} -e '/^.*ffmpeg version.*$/!d')
+		versionNumber=$(echo ${versionFfmpeg} | ${SED} -e 's/^.*ffmpeg version \(@<:@0123456789@:>@\+\).\(@<:@0123456789@:>@\+\).\(@<:@0123456789@:>@\+\).*$/\1.\2.\3/')
+
+		AC_MSG_NOTICE([Minumum required version of ffmpeg = ${minVersion}])
+		AC_MSG_NOTICE([Ffmpeg version string   = ${versionFfmpeg}])
+		AC_MSG_NOTICE([Found version of ffmpeg = ${versionNumber}])
+
+		AS_VERSION_COMPARE(
+
+			[${versionNumber}],
+			[${minVersion}],
+			[
+				AS_BOX(
+
+					[Minimum required version of ffmpeg = ${minVersion} : Found version of ffmpeg = ${versionNumber}],
+					[=])
+				AC_MSG_ERROR([Version of ffmpeg found is unacceptable - probably because it is too old!])
+			],
+			[AC_MSG_NOTICE([Version of ffmpeg found is acceptable.])],
+			[AC_MSG_NOTICE([Version of ffmpeg found is acceptable.])]
+		)
+
+		## This Autoconf macro was using AX_COMPARE_VERSION to compare version strings, before it
+		## was switched over to use AS_VERSION_COMPARE instead. AX_COMPARE_VERSION might be a better
+		## option, but it introduces another dependency into this Autoconf macro which therefore
+		## needs to be m4_included.
+		##
+		## AX_COMPARE_VERSION(
+		##
+		##	[${versionNumber}],
+		##	[ge],
+		##	[${minVersion}],
+		##	[AC_MSG_NOTICE([Version of ffmpeg found is acceptable.])],
+		##	[AC_MSG_NOTICE([Version of ffmpeg found is unacceptable; probably because it is too old!])]
+		## )
+	]
+)
