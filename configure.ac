@@ -60,6 +60,6 @@ AC_MSG_NOTICE([Variable FFMPEG  = \"${FFMPEG}\"])
 
 AC_CONFIG_FILES(
 	[Makefile
-     python/runFfmpeg.py])
+	 python/runFfmpeg.py])
 
 AC_OUTPUT
