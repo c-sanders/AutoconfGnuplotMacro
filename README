@@ -22,3 +22,25 @@ Configuration and installation
 
 For instructions on how to configure and install this packge, pleaase refer to the file which is
 named INSTALL.
+
+If you can't be bothered reading the INSTALL file, then you might be able to get away with simply
+running the following two commands from the command line.
+
+  > configure
+  > make install
+
+The first command will run this packge's configure script, while the second command will install all
+of the necessary files into their correct locations. As was mentioned above, this package doesn't
+need to compile or build anything. This is the reason why you don't need run the make command
+without any explicit target, that is;
+
+  > make
+
+If the configure script cannot find an installed copy of the ffmpeg command, then you might need to
+tell it where it can find one. In this case, you will need to pass the --with-ffmpeg option to the
+configure script when it is invoked, such as in the following example;
+
+  > configure --with-ffmpeg=/home/foo/bin/ffmpeg
+
+If this doesn't work either, then your copy of ffmpeg might be too old, or you might not have a copy
+of ffmpeg installed at all :(
